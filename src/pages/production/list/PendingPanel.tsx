@@ -32,7 +32,11 @@ export function PendingPanel() {
       <div className="flex gap-2">
         <Button
           variant="outline"
-          onClick={() => exportPendingProductsCsv(pending)}
+          onClick={() => {
+            exportPendingProductsCsv(pending);
+            clearPendingProducts();
+            setPending([]);
+          }}
         >
           Export CSV
         </Button>

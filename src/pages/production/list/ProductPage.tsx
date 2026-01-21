@@ -45,10 +45,15 @@ export default function ProductPage() {
       pending.forEach((p) => {
         const exists = data.products.some((prod) => prod.sku === p.sku);
 
-        if (exists) {
+        if (p.action === "create" && exists) {
+          removePendingProduct(p.sku);
+        }
+
+        if (p.action === "delete" && !exists) {
           removePendingProduct(p.sku);
         }
       });
+
       if (
         (actionState?.action === "create" ||
           actionState?.action === "update") &&

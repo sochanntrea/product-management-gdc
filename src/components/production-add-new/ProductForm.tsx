@@ -41,6 +41,7 @@ export function ProductForm({ value, errors = {}, onChange }: Props) {
               <Input
                 value={value.title}
                 onChange={(e) => onChange("title", e.target.value)}
+                placeholder="Type product name here..."
               />
               {errors.title && (
                 <p className="text-xs text-red-600 mt-1">{errors.title}</p>
@@ -55,6 +56,7 @@ export function ProductForm({ value, errors = {}, onChange }: Props) {
                 className="min-h-[140px]"
                 value={value.description}
                 onChange={(e) => onChange("description", e.target.value)}
+                placeholder="Type product description here..."
               />
               {errors.description && (
                 <p className="text-xs text-red-600 mt-1">
@@ -76,6 +78,7 @@ export function ProductForm({ value, errors = {}, onChange }: Props) {
               type="number"
               value={value.price}
               onChange={(e) => onChange("price", e.target.value)}
+              placeholder="$ Type base prive here..."
             />
             {errors.price && (
               <p className="text-xs text-red-600 mt-1">{errors.price}</p>
@@ -89,6 +92,7 @@ export function ProductForm({ value, errors = {}, onChange }: Props) {
               type="number"
               value={value.discountPercentage}
               onChange={(e) => onChange("discountPercentage", e.target.value)}
+              placeholder="Type discount percentage..."
             />
             {errors.discountPercentage && (
               <p className="text-xs text-red-600 mt-1">
@@ -109,6 +113,7 @@ export function ProductForm({ value, errors = {}, onChange }: Props) {
               <Input
                 value={value.sku}
                 onChange={(e) => onChange("sku", e.target.value)}
+                placeholder="Type product SKU here..."
               />
               {errors.sku && (
                 <p className="text-xs text-red-600 mt-1">{errors.sku}</p>
@@ -123,6 +128,7 @@ export function ProductForm({ value, errors = {}, onChange }: Props) {
                 type="number"
                 value={value.stock}
                 onChange={(e) => onChange("stock", e.target.value)}
+                placeholder="Type product quantity here..."
               />
               {errors.stock && (
                 <p className="text-xs text-red-600 mt-1">{errors.stock}</p>
