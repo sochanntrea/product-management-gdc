@@ -13,7 +13,7 @@ import {
   getPendingProducts,
   removePendingProduct,
 } from "@/features/products/components/handling-error/pendingProducts";
-import { PendingPanel } from "../../components/handling-error/PendingPanel";
+import { PendingPanel } from "../../components/handling-error";
 import { toast } from "sonner";
 
 export default function ProductPage() {
