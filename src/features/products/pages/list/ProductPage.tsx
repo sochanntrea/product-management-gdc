@@ -12,8 +12,8 @@ import ComingSoon from "@/features/coming-soon/pages/coming_soon";
 import {
   getPendingProducts,
   removePendingProduct,
-} from "@/utils/pendingProducts";
-import { PendingPanel } from "./PendingPanel";
+} from "@/features/products/components/handling-error/pendingProducts";
+import { PendingPanel } from "../../components/handling-error/PendingPanel";
 import { toast } from "sonner";
 
 export default function ProductPage() {

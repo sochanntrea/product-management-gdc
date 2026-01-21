@@ -1,4 +1,4 @@
-import { PendingProduct } from "./pendingProducts";
+import { PendingProduct } from "@/features/products/components/handling-error/pendingProducts";
 
 export function exportPendingProductsCsv(data: PendingProduct[]) {
   if (data.length === 0) return;

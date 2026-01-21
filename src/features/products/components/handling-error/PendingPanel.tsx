@@ -4,8 +4,8 @@ import {
   getPendingProducts,
   clearPendingProducts,
   PENDING_EVENT,
-} from "@/utils/pendingProducts";
-import { exportPendingProductsCsv } from "@/utils/exportPendingCsv";
+} from "@/features/products/components/handling-error/pendingProducts";
+import { exportPendingProductsCsv } from "@/features/products/components/handling-error/exportPendingCsv";
 
 export function PendingPanel() {
   const [pending, setPending] = useState(getPendingProducts());

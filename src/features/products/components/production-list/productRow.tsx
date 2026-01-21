@@ -17,7 +17,7 @@ import {
 import { Product } from "../../types/production-list/type";
 import { deleteProduct } from "@/features/products/services/production-delete/product.api";
 import { formatDate } from "@/utils/date";
-import { addPendingProduct } from "@/utils/pendingProducts";
+import { addPendingProduct } from "@/features/products/components/handling-error/pendingProducts";
 import { toast } from "sonner";
 
 interface Props {

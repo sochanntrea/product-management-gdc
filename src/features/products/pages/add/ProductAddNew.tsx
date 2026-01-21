@@ -8,7 +8,7 @@ import {
 } from "@/features/products/components/production-add-edit/ProductForm";
 import { Breadcrumb } from "@/components/breadcrumb/Breadcrumb";
 import { useNavigate } from "react-router-dom";
-import { addPendingProduct } from "@/utils/pendingProducts";
+import { addPendingProduct } from "@/features/products/components/handling-error/pendingProducts";
 import { toast } from "sonner";
 
 const INITIAL_FORM: ProductFormValue = {

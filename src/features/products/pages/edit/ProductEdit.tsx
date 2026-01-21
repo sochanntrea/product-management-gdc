@@ -10,7 +10,7 @@ import {
   ProductForm,
   ProductFormValue,
 } from "@/features/products/components/production-add-edit/ProductForm";
-import { addPendingProduct } from "@/utils/pendingProducts";
+import { addPendingProduct } from "@/features/products/components/handling-error/pendingProducts";
 import { toast } from "sonner";
 
 type Errors = Partial<Record<keyof ProductFormValue, string>>;
