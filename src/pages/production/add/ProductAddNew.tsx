@@ -5,7 +5,7 @@ import { createProduct } from "@/services/production-add-new/product.api";
 import {
   ProductForm,
   ProductFormValue,
-} from "@/components/production-add-new/ProductForm";
+} from "@/components/production-add-edit/ProductForm";
 import { Breadcrumb } from "@/components/breadcrumb/Breadcrumb";
 import { useNavigate } from "react-router-dom";
 import { addPendingProduct } from "@/utils/pendingProducts";

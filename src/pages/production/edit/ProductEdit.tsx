@@ -9,7 +9,7 @@ import {
 import {
   ProductForm,
   ProductFormValue,
-} from "@/components/production-add-new/ProductForm";
+} from "@/components/production-add-edit/ProductForm";
 import { addPendingProduct } from "@/utils/pendingProducts";
 import { toast } from "sonner";
 
