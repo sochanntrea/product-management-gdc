@@ -24,7 +24,7 @@ export function TabBar({ activeTab, onChange }: Props) {
             "px-4 py-1.5 text-sm font-medium rounded-md transition",
             activeTab === tab.value
               ? "bg-blue-100 text-blue-500 shadow"
-              : "text-muted-foreground hover:text-foreground text-gray-500"
+              : "text-muted-foreground hover:text-foreground text-gray-500",
           )}
         >
           {tab.label}

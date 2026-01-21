@@ -19,10 +19,7 @@ export function SortHeader({
   const isActive = activeKey === sortKey;
 
   const sortIcon = !isActive ? (
-    <ChevronDown
-      size={14}
-      className="text-muted-foreground opacity-40"
-    />
+    <ChevronDown size={14} className="text-muted-foreground opacity-40" />
   ) : order === "asc" ? (
     <ChevronUp size={14} className="text-blue-600" />
   ) : (

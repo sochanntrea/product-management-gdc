@@ -7,7 +7,6 @@ import { ProductTable } from "@/components/production-list/productTable";
 import { ProductTab, Product } from "@/types/production-list/type";
 import ComingSoon from "@/pages/coming-soon/coming_soon";
 
-
 export default function ProductPage() {
   const [activeTab, setActiveTab] = useState<ProductTab>("all");
 
@@ -35,21 +34,15 @@ export default function ProductPage() {
   const allSelected =
     selected.length === products.length && products.length > 0;
 
-  const someSelected =
-    selected.length > 0 &&
-    selected.length < products.length;
+  const someSelected = selected.length > 0 && selected.length < products.length;
 
   const toggleAll = () => {
-    setSelected(
-      allSelected ? [] : products.map((p) => p.sku)
-    );
+    setSelected(allSelected ? [] : products.map((p) => p.sku));
   };
 
   const toggleOne = (sku: string) => {
     setSelected((prev) =>
-      prev.includes(sku)
-        ? prev.filter((id) => id !== sku)
-        : [...prev, sku]
+      prev.includes(sku) ? prev.filter((id) => id !== sku) : [...prev, sku],
     );
   };
 

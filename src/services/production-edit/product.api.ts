@@ -1,6 +1,5 @@
+import { BASE_URL } from "@/config/env";
 import axios from "axios";
-
-const BASE_URL = "https://dummyjson.com/products";
 
 export interface ProductPayload {
   title: string;
@@ -16,10 +15,7 @@ export const getProductById = async (id: string) => {
   return res.data;
 };
 
-export const updateProduct = async (
-  id: string,
-  payload: ProductPayload
-) => {
+export const updateProduct = async (id: string, payload: ProductPayload) => {
   const res = await axios.put(`${BASE_URL}/${id}`, payload, {
     headers: { "Content-Type": "application/json" },
   });

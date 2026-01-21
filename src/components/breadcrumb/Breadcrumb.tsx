@@ -1,9 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 
 function formatSegment(segment: string) {
-  return segment
-    .replace(/-/g, " ")
-    .replace(/\b\w/g, (c) => c.toUpperCase());
+  return segment.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
 export function Breadcrumb() {
@@ -16,10 +14,7 @@ export function Breadcrumb() {
 
   return (
     <div className="text-sm text-muted-foreground">
-      <Link
-        to={`/${parent}`}
-        className="text-blue-600 hover:underline"
-      >
+      <Link to={`/${parent}`} className="text-blue-600 hover:underline">
         {formatSegment(parent)}
       </Link>
       <span className="mx-1">›</span>

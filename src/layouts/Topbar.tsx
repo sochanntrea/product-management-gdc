@@ -1,9 +1,5 @@
 import { useLocation } from "react-router-dom";
-import {
-  Bell,
-  LogOut,
-  User,
-} from "lucide-react";
+import { Bell, LogOut, User } from "lucide-react";
 
 import {
   DropdownMenu,
@@ -19,20 +15,11 @@ import {
 } from "@/components/ui/popover";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 
-/* ---------------------------------- */
-/* Helpers */
-/* ---------------------------------- */
 function formatTitle(segment: string) {
-  return segment
-    .replace(/-/g, " ")
-    .replace(/\b\w/g, (c) => c.toUpperCase());
+  return segment.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
-/* ---------------------------------- */
-/* Topbar */
-/* ---------------------------------- */
 export default function Topbar() {
   const { pathname } = useLocation();
   const segments = pathname.split("/").filter(Boolean);
@@ -46,7 +33,6 @@ export default function Topbar() {
 
   const onLogout = () => {
     alert("Logout clicked");
-    // clear token + navigate("/login")
   };
 
   return (
@@ -70,9 +56,7 @@ export default function Topbar() {
           </PopoverTrigger>
 
           <PopoverContent align="end" className="w-64 p-2">
-            <div className="text-sm font-medium mb-2">
-              Notifications
-            </div>
+            <div className="text-sm font-medium mb-2">Notifications</div>
 
             <div className="space-y-2 text-sm">
               <div className="rounded-md p-2 hover:bg-muted cursor-pointer">
@@ -88,7 +72,6 @@ export default function Topbar() {
           </PopoverContent>
         </Popover>
 
-        {/* USER PROFILE */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button>

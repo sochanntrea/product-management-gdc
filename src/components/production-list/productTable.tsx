@@ -1,4 +1,10 @@
-import { Table, TableBody, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Product } from "../../types/production-list/type";
 import { getPaginationRange } from "./pagination.utils";
@@ -32,8 +38,7 @@ export function ProductTable({
   onPageChange,
 }: Props) {
   const pages = getPaginationRange(page, totalPages);
-  const { sort, toggleSort, sortedProducts } =
-    useProductSort(products);
+  const { sort, toggleSort, sortedProducts } = useProductSort(products);
 
   let headerChecked: boolean | "indeterminate";
   if (allSelected) {
@@ -106,8 +111,8 @@ export function ProductTable({
       </Table>
       <div className="flex justify-between items-center px-4 py-3 text-sm text-muted-foreground">
         <span>
-          Showing {(page - 1) * 10 + 1}–
-          {Math.min(page * 10, total)} from {total}
+          Showing {(page - 1) * 10 + 1}–{Math.min(page * 10, total)} from{" "}
+          {total}
         </span>
 
         <div className="flex items-center gap-1">
@@ -123,7 +128,10 @@ export function ProductTable({
             let ellipsisCount = 0;
             return pages.map((p) =>
               p === "..." ? (
-                <span key={`ellipsis-${++ellipsisCount}`} className="px-2 text-blue-400">
+                <span
+                  key={`ellipsis-${++ellipsisCount}`}
+                  className="px-2 text-blue-400"
+                >
                   …
                 </span>
               ) : (
@@ -138,7 +146,7 @@ export function ProductTable({
                 >
                   {p}
                 </button>
-              )
+              ),
             );
           })()}
 

@@ -1,33 +1,36 @@
-DGC Product Management
+# DGC Product Management
 
-A web-based Product Management application built with React, TypeScript, and Vite, designed for scalability, performance, and modern frontend development practices.
+A web-based Product Management application built with **React**, **TypeScript**, and **Vite**, designed for scalability, performance, and modern frontend development practices.
 
-Tech Stack
+---
 
-React (Functional Components)
+## Tech Stack
 
-TypeScript
+- React (Functional Components)
+- TypeScript
+- Vite (Build Tool & Dev Server)
+- Tailwind CSS
+- shadcn/ui
+- **Node.js 20**
+- **npm 9+**
 
-Vite (Build Tool & Dev Server)
+---
 
-Tailwind CSS
-
-shadcn/ui
-
-npm
-
-Prerequisites
+## Prerequisites
 
 Before setting up the project, ensure you have the following installed:
 
-Node.js v18 or later
+- **Node.js v20.x (LTS)**
+- **npm v9 or later**
 
-npm v9 or later
+> Using other Node.js versions may cause unexpected issues.
 
-You can verify your versions by running:
+### Verify your environment
 
+```bash
 node -v
 npm -v
+
 
 Project Setup Guide
 
@@ -47,3 +50,13 @@ npm run dev
 
 
 After starting the server, the application will be available at the local URL shown in your terminal (typically http://localhost:5173).
+
+## Continuous Integration (CI)
+
+This project uses **GitHub Actions** for Continuous Integration.
+
+The CI pipeline automatically:
+- installs dependencies
+- builds the application
+
+CI runs on every push and pull request to the `main` branch.

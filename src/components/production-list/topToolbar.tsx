@@ -10,10 +10,7 @@ export function TopToolbar() {
     <div className="flex justify-between items-center">
       <div className="relative w-[80%]">
         <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
-        <Input
-          placeholder="Search order..."
-          className="pl-9"
-        />
+        <Input placeholder="Search order..." className="pl-9" />
       </div>
       <div className="flex gap-3">
         <Button

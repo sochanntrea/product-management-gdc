@@ -23,11 +23,7 @@ interface Props {
   readonly onToggle: () => void;
 }
 
-export function ProductRow({
-  product,
-  selected,
-  onToggle,
-}: Props) {
+export function ProductRow({ product, selected, onToggle }: Props) {
   const navigate = useNavigate();
   const [openDelete, setOpenDelete] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -67,15 +63,11 @@ export function ProductRow({
               alt="product"
               className="w-10 h-10 rounded-md object-cover"
             />
-            <div className="font-medium">
-              {product.title}
-            </div>
+            <div className="font-medium">{product.title}</div>
           </div>
         </TableCell>
 
-        <TableCell className="text-primary">
-          {product.sku}
-        </TableCell>
+        <TableCell className="text-primary">{product.sku}</TableCell>
         <TableCell>{product.category}</TableCell>
         <TableCell>{product.stock}</TableCell>
         <TableCell>${product.price}</TableCell>
@@ -95,26 +87,19 @@ export function ProductRow({
           </div>
         </TableCell>
       </TableRow>
-      
-      <AlertDialog
-        open={openDelete}
-        onOpenChange={setOpenDelete}
-      >
+
+      <AlertDialog open={openDelete} onOpenChange={setOpenDelete}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>
-              Delete product?
-            </AlertDialogTitle>
+            <AlertDialogTitle>Delete product?</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone.  
-              The product will be permanently removed.
+              This action cannot be undone. The product will be permanently
+              removed.
             </AlertDialogDescription>
           </AlertDialogHeader>
 
           <AlertDialogFooter>
-            <AlertDialogCancel disabled={loading}>
-              Cancel
-            </AlertDialogCancel>
+            <AlertDialogCancel disabled={loading}>Cancel</AlertDialogCancel>
             <AlertDialogAction
               onClick={onDelete}
               disabled={loading}

@@ -1,6 +1,7 @@
+import { BASE_URL } from "@/config/env";
 import axios from "axios";
 
-const API_URL = "https://dummyjson.com/products/add";
+const API_URL = `${BASE_URL}/add`;
 
 export interface CreateProductPayload {
   title: string;
@@ -11,9 +12,7 @@ export interface CreateProductPayload {
   stock: number;
 }
 
-export const createProduct = async (
-  payload: CreateProductPayload
-) => {
+export const createProduct = async (payload: CreateProductPayload) => {
   const { data } = await axios.post(API_URL, payload);
   return data;
 };

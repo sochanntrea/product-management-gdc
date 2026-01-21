@@ -10,7 +10,7 @@ export default function AppRoutes() {
     <Routes>
       <Route element={<AppLayout />}>
         <Route path="/" element={<Navigate to="/products" replace />} />
-        
+
         <Route path="/products" element={<ProductPage />} />
         <Route path="/products/add-product" element={<ProductAddNew />} />
         <Route path="/products/edit-product/:id" element={<ProductEdit />} />

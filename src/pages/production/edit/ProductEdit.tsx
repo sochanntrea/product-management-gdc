@@ -3,14 +3,13 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { X, Save } from "lucide-react";
 import {
-    getProductById,
-    updateProduct,
-    } from "@/services/production-edit/product.api";
+  getProductById,
+  updateProduct,
+} from "@/services/production-edit/product.api";
 import {
-    ProductForm,
-    ProductFormValue,
-    } from "@/components/production-add-new/ProductForm";
-
+  ProductForm,
+  ProductFormValue,
+} from "@/components/production-add-new/ProductForm";
 
 const INITIAL_FORM: ProductFormValue = {
   title: "",
@@ -25,8 +24,7 @@ const ProductEdit = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const [form, setForm] =
-    useState<ProductFormValue>(INITIAL_FORM);
+  const [form, setForm] = useState<ProductFormValue>(INITIAL_FORM);
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
 
@@ -45,7 +43,7 @@ const ProductEdit = () => {
           sku: data.sku ?? "",
           stock: String(data.stock ?? ""),
         });
-      } catch (err) {
+      } catch {
         alert("Failed to load product");
       } finally {
         setFetching(false);
@@ -55,10 +53,7 @@ const ProductEdit = () => {
     fetchProduct();
   }, [id]);
 
-  const updateForm = (
-    key: keyof ProductFormValue,
-    value: string
-  ) => {
+  const updateForm = (key: keyof ProductFormValue, value: string) => {
     setForm((prev) => ({ ...prev, [key]: value }));
   };
 
@@ -78,8 +73,8 @@ const ProductEdit = () => {
       });
 
       alert("Product updated successfully");
-      navigate("/product");
-    } catch (err) {
+      navigate("/products");
+    } catch {
       alert("Failed to update product");
     } finally {
       setLoading(false);
@@ -119,10 +114,7 @@ const ProductEdit = () => {
         </div>
       </div>
 
-      <ProductForm
-        value={form}
-        onChange={updateForm}
-      />
+      <ProductForm value={form} onChange={updateForm} />
     </div>
   );
 };

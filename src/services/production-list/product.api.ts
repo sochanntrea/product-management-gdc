@@ -1,7 +1,6 @@
 import axios from "axios";
 import { Product } from "../../types/production-list/type";
-
-const BASE_URL = "https://dummyjson.com/products";
+import { BASE_URL } from "@/config/env";
 
 export interface ProductResponse {
   products: Product[];
@@ -12,7 +11,7 @@ export interface ProductResponse {
 
 export async function getProducts(
   page: number,
-  limit = 10
+  limit = 10,
 ): Promise<ProductResponse> {
   const skip = (page - 1) * limit;
 
@@ -20,8 +19,7 @@ export async function getProducts(
     params: {
       limit,
       skip,
-      select:
-        "title,price,sku,stock,category,thumbnail,added",
+      select: "title,price,sku,stock,category,thumbnail,added",
     },
   });
 

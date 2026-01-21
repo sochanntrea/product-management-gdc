@@ -21,14 +21,10 @@ const INITIAL_FORM: ProductFormValue = {
 
 export default function ProductAddNew() {
   const navigate = useNavigate();
-  const [form, setForm] =
-    useState<ProductFormValue>(INITIAL_FORM);
+  const [form, setForm] = useState<ProductFormValue>(INITIAL_FORM);
   const [loading, setLoading] = useState(false);
 
-  const updateForm = (
-    key: keyof ProductFormValue,
-    value: string
-  ) => {
+  const updateForm = (key: keyof ProductFormValue, value: string) => {
     setForm((prev) => ({ ...prev, [key]: value }));
   };
 
@@ -60,10 +56,7 @@ export default function ProductAddNew() {
         <Breadcrumb />
 
         <div className="flex gap-2">
-          <Button
-            variant="outline"
-            onClick={() => navigate("/products")}
-          >
+          <Button variant="outline" onClick={() => navigate("/products")}>
             <X size={16} /> Cancel
           </Button>
 
@@ -77,10 +70,7 @@ export default function ProductAddNew() {
         </div>
       </div>
 
-      <ProductForm
-        value={form}
-        onChange={updateForm}
-      />
+      <ProductForm value={form} onChange={updateForm} />
     </div>
   );
 }
