@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { getProducts } from "@/services/production-list/product.api";
@@ -19,7 +19,7 @@ export default function ProductPage() {
   const location = useLocation();
 
   const actionState = location.state as
-    | { action?: "create" | "update"; productSku?: string }
+    | { action?: "create" | "update" | "delete"; productSku?: string }
     | undefined;
 
   const [activeTab, setActiveTab] = useState<ProductTab>("all");
@@ -29,8 +29,11 @@ export default function ProductPage() {
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
 
+  const hasShownSyncAlert = useRef(false);
+
   const limit = 10;
   const totalPages = Math.ceil(total / limit);
+
   const loadProducts = useCallback(async () => {
     try {
       setLoading(true);
@@ -40,6 +43,7 @@ export default function ProductPage() {
       setProducts(data.products);
       setTotal(data.total);
       setSelected([]);
+
       const pending = getPendingProducts();
 
       pending.forEach((p) => {
@@ -55,15 +59,21 @@ export default function ProductPage() {
       });
 
       if (
-        (actionState?.action === "create" ||
-          actionState?.action === "update") &&
+        !hasShownSyncAlert.current &&
+        actionState?.action &&
         actionState.productSku
       ) {
         const exists = data.products.some(
           (p) => p.sku === actionState.productSku,
         );
 
-        if (!exists) {
+        const shouldShowAlert =
+          (actionState.action === "create" && !exists) ||
+          actionState.action === "update" ||
+          (actionState.action === "delete" && exists);
+
+        if (shouldShowAlert) {
+          hasShownSyncAlert.current = true;
           alert(
             "Your request was submitted successfully, but the data is still syncing. Please refresh or check again shortly.",
           );
@@ -74,7 +84,7 @@ export default function ProductPage() {
     } finally {
       setLoading(false);
     }
-  }, [page, limit, actionState?.productSku]);
+  }, [page, limit, actionState?.action, actionState?.productSku]);
 
   useEffect(() => {
     if (activeTab !== "all") return;
