@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Plus, X } from "lucide-react";
-
 import { createProduct } from "@/services/production-add-new/product.api";
 import {
   ProductForm,
@@ -9,6 +8,7 @@ import {
 } from "@/components/production-add-new/ProductForm";
 import { Breadcrumb } from "@/components/breadcrumb/Breadcrumb";
 import { useNavigate } from "react-router-dom";
+import { addPendingProduct } from "@/utils/pendingProducts";
 
 const INITIAL_FORM: ProductFormValue = {
   title: "",
@@ -17,18 +17,43 @@ const INITIAL_FORM: ProductFormValue = {
   price: "",
   sku: "",
   stock: "",
+  discountPercentage: "",
 };
 
 export default function ProductAddNew() {
   const navigate = useNavigate();
   const [form, setForm] = useState<ProductFormValue>(INITIAL_FORM);
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState<
+    Partial<Record<keyof ProductFormValue, string>>
+  >({});
 
   const updateForm = (key: keyof ProductFormValue, value: string) => {
     setForm((prev) => ({ ...prev, [key]: value }));
+    setErrors((prev) => ({ ...prev, [key]: undefined }));
+  };
+
+  const validate = () => {
+    const e: typeof errors = {};
+
+    if (!form.title.trim()) e.title = "Product name is required";
+    if (!form.description.trim()) e.description = "Description is required";
+    if (!form.category) e.category = "Category is required";
+    if (!form.price || Number(form.price) <= 0)
+      e.price = "Price must be greater than 0";
+    if (!form.discountPercentage || Number(form.discountPercentage) <= 0)
+      e.discountPercentage = "Discount must be greater than 0";
+    if (!form.sku.trim()) e.sku = "SKU is required";
+    if (!form.stock || Number(form.stock) <= 0)
+      e.stock = "Quantity must be greater than 0";
+
+    setErrors(e);
+    return Object.keys(e).length === 0;
   };
 
   const onSubmit = async () => {
+    if (!validate()) return;
+
     try {
       setLoading(true);
 
@@ -41,8 +66,23 @@ export default function ProductAddNew() {
         stock: Number(form.stock),
       });
 
-      alert("Product added successfully");
-      navigate("/products");
+      addPendingProduct({
+        sku: form.sku,
+        action: "create",
+        snapshot: form,
+        timestamp: Date.now(),
+      });
+
+      alert(
+        "Your request has been submitted successfully. The list will sync shortly.",
+      );
+
+      navigate("/products", {
+        state: {
+          action: "create",
+          productSku: form.sku,
+        },
+      });
     } catch {
       alert("Failed to add product");
     } finally {
@@ -70,7 +110,7 @@ export default function ProductAddNew() {
         </div>
       </div>
 
-      <ProductForm value={form} onChange={updateForm} />
+      <ProductForm value={form} onChange={updateForm} errors={errors} />
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { SortKey, SortOrder } from "./useProductSort";
 interface Props {
   readonly label: string;
   readonly sortKey: SortKey;
-  readonly activeKey: SortKey;
+  readonly activeKey: SortKey | "";
   readonly order: SortOrder;
   readonly onSort: (key: SortKey) => void;
 }

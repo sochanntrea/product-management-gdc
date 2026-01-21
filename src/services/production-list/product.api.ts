@@ -19,7 +19,7 @@ export async function getProducts(
     params: {
       limit,
       skip,
-      select: "title,price,sku,stock,category,thumbnail,added",
+      select: "title,price,sku,stock,category,thumbnail,meta",
     },
   });
 

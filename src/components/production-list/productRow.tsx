@@ -16,6 +16,8 @@ import {
 
 import { Product } from "../../types/production-list/type";
 import { deleteProduct } from "@/services/production-delete/product.api";
+import { formatDate } from "@/utils/date";
+import { addPendingProduct } from "@/utils/pendingProducts";
 
 interface Props {
   readonly product: Product;
@@ -35,9 +37,31 @@ export function ProductRow({ product, selected, onToggle }: Props) {
   const onDelete = async () => {
     try {
       setLoading(true);
+
       await deleteProduct(product.id);
+
+      addPendingProduct({
+        sku: product.sku,
+        action: "delete",
+        snapshot: {
+          title: product.title,
+          description: "",
+          category: product.category,
+          price: String(product.price),
+          sku: product.sku,
+          stock: String(product.stock),
+          discountPercentage: "",
+        },
+        timestamp: Date.now(),
+      });
+
       setOpenDelete(false);
-      alert("Product deleted successfully");
+
+      setTimeout(() => {
+        alert(
+          "Your delete request has been submitted successfully. The list will be updated shortly.",
+        );
+      }, 0);
     } catch {
       alert("Failed to delete product");
     } finally {
@@ -71,6 +95,7 @@ export function ProductRow({ product, selected, onToggle }: Props) {
         <TableCell>{product.category}</TableCell>
         <TableCell>{product.stock}</TableCell>
         <TableCell>${product.price}</TableCell>
+        <TableCell>{formatDate(product.meta.createdAt)}</TableCell>
 
         <TableCell className="text-right">
           <div className="flex justify-end gap-3 text-muted-foreground">

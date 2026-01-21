@@ -10,6 +10,9 @@ import {
   ProductForm,
   ProductFormValue,
 } from "@/components/production-add-new/ProductForm";
+import { addPendingProduct } from "@/utils/pendingProducts";
+
+type Errors = Partial<Record<keyof ProductFormValue, string>>;
 
 const INITIAL_FORM: ProductFormValue = {
   title: "",
@@ -18,6 +21,7 @@ const INITIAL_FORM: ProductFormValue = {
   price: "",
   sku: "",
   stock: "",
+  discountPercentage: "",
 };
 
 const ProductEdit = () => {
@@ -25,6 +29,7 @@ const ProductEdit = () => {
   const navigate = useNavigate();
 
   const [form, setForm] = useState<ProductFormValue>(INITIAL_FORM);
+  const [errors, setErrors] = useState<Errors>({});
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
 
@@ -42,6 +47,7 @@ const ProductEdit = () => {
           price: String(data.price ?? ""),
           sku: data.sku ?? "",
           stock: String(data.stock ?? ""),
+          discountPercentage: String(data.discountPercentage ?? ""),
         });
       } catch {
         alert("Failed to load product");
@@ -55,10 +61,29 @@ const ProductEdit = () => {
 
   const updateForm = (key: keyof ProductFormValue, value: string) => {
     setForm((prev) => ({ ...prev, [key]: value }));
+    setErrors((prev) => ({ ...prev, [key]: undefined }));
+  };
+
+  const validate = (): boolean => {
+    const e: Errors = {};
+
+    if (!form.title.trim()) e.title = "Product name is required";
+    if (!form.description.trim()) e.description = "Description is required";
+    if (!form.category) e.category = "Category is required";
+    if (!form.price || Number(form.price) <= 0)
+      e.price = "Price must be greater than 0";
+    if (!form.discountPercentage || Number(form.discountPercentage) <= 0)
+      e.discountPercentage = "Discount must be greater than 0";
+    if (!form.sku.trim()) e.sku = "SKU is required";
+    if (!form.stock || Number(form.stock) <= 0)
+      e.stock = "Quantity must be greater than 0";
+
+    setErrors(e);
+    return Object.keys(e).length === 0;
   };
 
   const onSubmit = async () => {
-    if (!id) return;
+    if (!id || !validate()) return;
 
     try {
       setLoading(true);
@@ -72,8 +97,23 @@ const ProductEdit = () => {
         stock: Number(form.stock),
       });
 
-      alert("Product updated successfully");
-      navigate("/products");
+      addPendingProduct({
+        sku: form.sku,
+        action: "update",
+        snapshot: form,
+        timestamp: Date.now(),
+      });
+
+      alert(
+        "Your update has been submitted successfully. The list will sync shortly.",
+      );
+
+      navigate("/products", {
+        state: {
+          action: "update",
+          productSku: form.sku,
+        },
+      });
     } catch {
       alert("Failed to update product");
     } finally {
@@ -81,9 +121,7 @@ const ProductEdit = () => {
     }
   };
 
-  if (fetching) {
-    return <div>Loading...</div>;
-  }
+  if (fetching) return <div>Loading...</div>;
 
   return (
     <div className="space-y-6">
@@ -108,13 +146,12 @@ const ProductEdit = () => {
             onClick={onSubmit}
             disabled={loading}
           >
-            <Save size={16} />
-            Save Changes
+            <Save size={16} /> Save Changes
           </Button>
         </div>
       </div>
 
-      <ProductForm value={form} onChange={updateForm} />
+      <ProductForm value={form} errors={errors} onChange={updateForm} />
     </div>
   );
 };

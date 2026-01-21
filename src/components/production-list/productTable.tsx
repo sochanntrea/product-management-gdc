@@ -94,6 +94,15 @@ export function ProductTable({
                 onSort={toggleSort}
               />
             </TableHead>
+            <TableHead>
+              <SortHeader
+                label="Added"
+                sortKey="meta.createdAt"
+                activeKey={sort.key}
+                order={sort.order}
+                onSort={toggleSort}
+              />
+            </TableHead>
             <TableHead className="text-right"> Action </TableHead>
           </TableRow>
         </TableHeader>

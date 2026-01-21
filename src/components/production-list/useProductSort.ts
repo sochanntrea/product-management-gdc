@@ -1,48 +1,62 @@
 import { useMemo, useState } from "react";
 import { Product } from "../../types/production-list/type";
 
-export type SortKey = "title" | "stock" | "price" | null;
 export type SortOrder = "asc" | "desc";
+export type SortKey =
+  | "title"
+  | "category"
+  | "price"
+  | "stock"
+  | "sku"
+  | "meta.createdAt";
+
+function getValueByPath<T>(obj: T, path: string): unknown {
+  return path.split(".").reduce((acc, key) => {
+    if (acc == null) return undefined;
+    return acc[key as keyof typeof acc];
+  }, obj as unknown);
+}
 
 export function useProductSort(products: Product[]) {
   const [sort, setSort] = useState<{
-    key: SortKey;
+    key: SortKey | "";
     order: SortOrder;
   }>({
-    key: null,
+    key: "",
     order: "asc",
   });
 
-  const toggleSort = (key: SortKey) => {
-    setSort((prev) => {
-      if (prev.key !== key) {
-        return { key, order: "asc" };
-      }
-      return {
-        key,
-        order: prev.order === "asc" ? "desc" : "asc",
-      };
-    });
+  const toggleSort = (key: SortKey | "") => {
+    setSort((prev) => ({
+      key,
+      order: prev.key === key && prev.order === "asc" ? "desc" : "asc",
+    }));
   };
 
   const sortedProducts = useMemo(() => {
     if (!sort.key) return products;
 
-    const key = sort.key as keyof Product;
-
     return [...products].sort((a, b) => {
-      const aVal = a[key];
-      const bVal = b[key];
+      const aVal = getValueByPath(a, sort.key);
+      const bVal = getValueByPath(b, sort.key);
 
-      if (typeof aVal === "string") {
+      if (aVal == null || bVal == null) return 0;
+
+      if (sort.key.includes("createdAt")) {
         return sort.order === "asc"
-          ? aVal.localeCompare(bVal as string)
-          : (bVal as string).localeCompare(aVal);
+          ? new Date(aVal as string | number | Date).getTime() -
+              new Date(bVal as string | number | Date).getTime()
+          : new Date(bVal as string | number | Date).getTime() -
+              new Date(aVal as string | number | Date).getTime();
+      }
+
+      if (typeof aVal === "number" && typeof bVal === "number") {
+        return sort.order === "asc" ? aVal - bVal : bVal - aVal;
       }
 
       return sort.order === "asc"
-        ? Number(aVal) - Number(bVal)
-        : Number(bVal) - Number(aVal);
+        ? String(aVal).localeCompare(String(bVal))
+        : String(bVal).localeCompare(String(aVal));
     });
   }, [products, sort]);
 
