@@ -6,6 +6,7 @@ import {
   Users,
   BarChart3,
 } from "lucide-react";
+import LOGO from "../assets/logo.png";
 
 const menu = [
   { label: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
@@ -26,7 +27,8 @@ export default function Sidebar() {
     >
       <div className="h-16 flex items-center justify-center lg:justify-start px-4 font-bold text-lg">
         <span className="lg:hidden">●</span>
-        <span className="hidden lg:block">● Logo</span>
+        {/* <span className="hidden lg:block">● Logo</span> */}
+        <img src={LOGO} alt="logo" />
       </div>
 
       <nav className="flex-1 px-2 space-y-1">
