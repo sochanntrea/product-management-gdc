@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/popover";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { toast } from "sonner";
 
 function formatTitle(segment: string) {
   return segment.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
@@ -32,7 +33,9 @@ export default function Topbar() {
   const title = formatTitle(titleSegment || "Dashboard");
 
   const onLogout = () => {
-    alert("Logout clicked");
+    toast("Logout", {
+      description: "Logout clicked",
+    });
   };
 
   return (

@@ -18,6 +18,7 @@ import { Product } from "../../types/production-list/type";
 import { deleteProduct } from "@/services/production-delete/product.api";
 import { formatDate } from "@/utils/date";
 import { addPendingProduct } from "@/utils/pendingProducts";
+import { toast } from "sonner";
 
 interface Props {
   readonly product: Product;
@@ -58,12 +59,16 @@ export function ProductRow({ product, selected, onToggle }: Props) {
       setOpenDelete(false);
 
       setTimeout(() => {
-        alert(
-          "Your delete request has been submitted successfully. The list will be updated shortly.",
-        );
+        toast("Sync in progress", {
+          description:
+            "Your delete request has been submitted successfully. The list will be updated shortly.",
+        });
       }, 0);
     } catch {
-      alert("Failed to delete product");
+      toast("Failed", {
+          description:
+            "Failed to delete product.",
+        });
     } finally {
       setLoading(false);
     }

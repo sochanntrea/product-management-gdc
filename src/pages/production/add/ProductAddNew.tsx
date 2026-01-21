@@ -9,6 +9,7 @@ import {
 import { Breadcrumb } from "@/components/breadcrumb/Breadcrumb";
 import { useNavigate } from "react-router-dom";
 import { addPendingProduct } from "@/utils/pendingProducts";
+import { toast } from "sonner";
 
 const INITIAL_FORM: ProductFormValue = {
   title: "",
@@ -73,9 +74,10 @@ export default function ProductAddNew() {
         timestamp: Date.now(),
       });
 
-      alert(
-        "Your request has been submitted successfully. The list will sync shortly.",
-      );
+      toast("Sync in progress", {
+        description:
+          "Your request has been submitted successfully. The list will sync shortly.",
+      });
 
       navigate("/products", {
         state: {
@@ -84,7 +86,9 @@ export default function ProductAddNew() {
         },
       });
     } catch {
-      alert("Failed to add product");
+      toast("Failed", {
+        description: "Failed to add product.",
+      });
     } finally {
       setLoading(false);
     }

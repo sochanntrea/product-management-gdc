@@ -14,6 +14,7 @@ import {
   removePendingProduct,
 } from "@/utils/pendingProducts";
 import { PendingPanel } from "./PendingPanel";
+import { toast } from "sonner";
 
 export default function ProductPage() {
   const location = useLocation();
@@ -74,13 +75,16 @@ export default function ProductPage() {
 
         if (shouldShowAlert) {
           hasShownSyncAlert.current = true;
-          alert(
-            "Your request was submitted successfully, but the data is still syncing. Please refresh or check again shortly.",
-          );
+          toast("Sync in progress", {
+            description:
+              "Your request was submitted successfully, but the data is still syncing. Please refresh or check again shortly.",
+          });
         }
       }
     } catch {
-      alert("Failed to load products");
+      toast("Failed", {
+        description: "Failed to load product.",
+      });
     } finally {
       setLoading(false);
     }

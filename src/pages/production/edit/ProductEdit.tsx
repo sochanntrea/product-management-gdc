@@ -11,6 +11,7 @@ import {
   ProductFormValue,
 } from "@/components/production-add-new/ProductForm";
 import { addPendingProduct } from "@/utils/pendingProducts";
+import { toast } from "sonner";
 
 type Errors = Partial<Record<keyof ProductFormValue, string>>;
 
@@ -50,7 +51,9 @@ const ProductEdit = () => {
           discountPercentage: String(data.discountPercentage ?? ""),
         });
       } catch {
-        alert("Failed to load product");
+        toast("Failed", {
+          description: "Failed to load product.",
+        });
       } finally {
         setFetching(false);
       }
@@ -104,9 +107,10 @@ const ProductEdit = () => {
         timestamp: Date.now(),
       });
 
-      alert(
-        "Your update has been submitted successfully. The list will sync shortly.",
-      );
+      toast("Sync in progress", {
+        description:
+          "Your update has been submitted successfully. The list will sync shortly.",
+      });
 
       navigate("/products", {
         state: {
@@ -115,7 +119,9 @@ const ProductEdit = () => {
         },
       });
     } catch {
-      alert("Failed to update product");
+      toast("Failed", {
+        description: "Failed to update product.",
+      });
     } finally {
       setLoading(false);
     }
