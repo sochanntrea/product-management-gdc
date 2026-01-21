@@ -1,4 +1,4 @@
-import { ProductFormValue } from "@/components/production-add-edit/ProductForm";
+import { ProductFormValue } from "@/features/products/components/production-add-edit/ProductForm";
 
 export type PendingProduct = {
   sku: string;

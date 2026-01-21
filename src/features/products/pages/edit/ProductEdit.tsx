@@ -5,11 +5,11 @@ import { X, Save } from "lucide-react";
 import {
   getProductById,
   updateProduct,
-} from "@/services/production-edit/product.api";
+} from "@/features/products/services/production-edit/product.api";
 import {
   ProductForm,
   ProductFormValue,
-} from "@/components/production-add-edit/ProductForm";
+} from "@/features/products/components/production-add-edit/ProductForm";
 import { addPendingProduct } from "@/utils/pendingProducts";
 import { toast } from "sonner";
 

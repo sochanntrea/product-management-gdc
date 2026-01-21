@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/alert-dialog";
 
 import { Product } from "../../types/production-list/type";
-import { deleteProduct } from "@/services/production-delete/product.api";
+import { deleteProduct } from "@/features/products/services/production-delete/product.api";
 import { formatDate } from "@/utils/date";
 import { addPendingProduct } from "@/utils/pendingProducts";
 import { toast } from "sonner";

@@ -1,9 +1,9 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import AppLayout from "@/layouts/AppLayout";
-import ProductPage from "@/pages/production/list/ProductPage";
-import ComingSoon from "@/pages/coming-soon/coming_soon";
-import ProductAddNew from "@/pages/production/add/ProductAddNew";
-import ProductEdit from "@/pages/production/edit/ProductEdit";
+import AppLayout from "@/components/layouts/AppLayout";
+import ProductPage from "@/features/products/pages/list/ProductPage";
+import ComingSoon from "@/features/coming-soon/pages/coming_soon";
+import ProductAddNew from "@/features/products/pages/add/ProductAddNew";
+import ProductEdit from "@/features/products/pages/edit/ProductEdit";
 
 export default function AppRoutes() {
   return (

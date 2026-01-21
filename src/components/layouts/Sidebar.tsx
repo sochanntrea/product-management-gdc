@@ -6,7 +6,7 @@ import {
   Users,
   BarChart3,
 } from "lucide-react";
-import LOGO from "../assets/logo.png";
+import LOGO from "../../assets/logo.png";
 
 const menu = [
   { label: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },

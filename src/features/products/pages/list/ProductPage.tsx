@@ -1,13 +1,13 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { getProducts } from "@/services/production-list/product.api";
-import { TopToolbar } from "@/components/production-list/topToolbar";
-import { FilterToolbar } from "@/components/production-list/filterToolbar";
-import { TabBar } from "@/components/production-list/tabBar";
-import { ProductTable } from "@/components/production-list/productTable";
-import { ProductTab, Product } from "@/types/production-list/type";
-import ComingSoon from "@/pages/coming-soon/coming_soon";
+import { getProducts } from "@/features/products/services/production-list/product.api";
+import { TopToolbar } from "@/features/products/components/production-list/topToolbar";
+import { FilterToolbar } from "@/features/products/components/production-list/filterToolbar";
+import { TabBar } from "@/features/products/components/production-list/tabBar";
+import { ProductTable } from "@/features/products/components/production-list/productTable";
+import { ProductTab, Product } from "@/features/products/types/production-list/type";
+import ComingSoon from "@/features/coming-soon/pages/coming_soon";
 
 import {
   getPendingProducts,
